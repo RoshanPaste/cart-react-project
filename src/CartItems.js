@@ -14,8 +14,41 @@ class CartItem extends React.Component {
     }
     
     increaseQty = () => {
-        console.log("this", this.state);
+        // this.setState({
+        //     qty: this.state.qty + 1
+        // });
+
+        // statement form 2 - if prevState required use this
+        this.setState((prev) => {
+            return {
+                qty: prev.qty + 1
+            }
+        });
     }
+
+    decreaseQty = () => {
+        const qty = this.state.qty;
+        if(qty === 0){
+            return;
+        }
+        // this.setState({
+        //     qty: this.state.qty + 1
+        // });
+
+        // statement form 2 - if prevState required use this
+        this.setState((prev) => {
+            return {
+                qty: prev.qty - 1
+            }
+        });
+    }
+
+    delete = () => {
+        this.setState({
+            qty: this.state.qty = 0
+        });
+    }
+
     render(){
         const {title, price, qty} = this.state;
         return(
@@ -39,11 +72,13 @@ class CartItem extends React.Component {
                             style={styles.icons} alt='decrease' 
                             className='action-icons' 
                             src='https://img.icons8.com/?size=512&id=DigGIRktG1KK&format=png' 
+                            onClick={this.decreaseQty}
                         />
                         <img 
                             style={styles.icons} alt='delete' 
                             className='action-icons' 
                             src='https://img.icons8.com/?size=512&id=83219&format=png' 
+                            onClick={this.delete}
                         />
                     </div>                   
                 </div>
